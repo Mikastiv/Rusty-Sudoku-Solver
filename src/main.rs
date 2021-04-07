@@ -32,8 +32,8 @@ fn main() {
 		match process_file(file) {
 			Ok(false) => println!("Board is unsolvable: {}", file),
 			Err(e) => {
-				println!("{} -> \"{}\"", e, file);
-				println!();
+				eprintln!("{} -> \"{}\"", e, file);
+				eprintln!();
 			}
             // Otherwise, solution is printed
 			_ => {}
