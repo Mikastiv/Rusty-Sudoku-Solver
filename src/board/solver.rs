@@ -1,6 +1,6 @@
 use super::get_1d_index;
 
-fn row_valid(row: usize, number: u8, board: &[u8]) -> bool {
+fn row_valid(row: usize, number: u32, board: &[u32]) -> bool {
     for col in 0..9 {
         if board[get_1d_index(row, col)] == number {
             return false;
@@ -10,7 +10,7 @@ fn row_valid(row: usize, number: u8, board: &[u8]) -> bool {
     true
 }
 
-fn col_valid(col: usize, number: u8, board: &[u8]) -> bool {
+fn col_valid(col: usize, number: u32, board: &[u32]) -> bool {
     for row in 0..9 {
         if board[get_1d_index(row, col)] == number {
             return false;
@@ -19,7 +19,7 @@ fn col_valid(col: usize, number: u8, board: &[u8]) -> bool {
     true
 }
 
-fn square_valid(row: usize, col: usize, number: u8, board: &[u8]) -> bool {
+fn square_valid(row: usize, col: usize, number: u32, board: &[u32]) -> bool {
     let square_row = row / 3;
     let square_col = col / 3;
 
@@ -37,13 +37,13 @@ fn square_valid(row: usize, col: usize, number: u8, board: &[u8]) -> bool {
     true
 }
 
-fn num_valid(row: usize, col: usize, number: u8, board: &[u8]) -> bool {
+fn num_valid(row: usize, col: usize, number: u32, board: &[u32]) -> bool {
     row_valid(row, number, board)
         && col_valid(col, number, board)
         && square_valid(row, col, number, board)
 }
 
-fn next_num(board: &[u8]) -> (usize, usize) {
+fn next_num(board: &[u32]) -> (usize, usize) {
     for row in 0..9 {
         for col in 0..9 {
             if board[get_1d_index(row, col)] == 0 {
@@ -55,7 +55,7 @@ fn next_num(board: &[u8]) -> (usize, usize) {
     (usize::MAX, usize::MAX)
 }
 
-pub fn solve(board: &mut [u8]) -> bool {
+pub fn solve(board: &mut [u32]) -> bool {
     // Find coordinates of the next number to try
     let (row, col) = next_num(board);
     // If no empty slot found, sudoku solved !

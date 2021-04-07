@@ -9,16 +9,16 @@ mod solver;
 
 const BOARD_SIZE: usize = 81;
 
-pub fn load<P: AsRef<Path>>(file: P) -> io::Result<Vec<u8>> {
+pub fn load<P: AsRef<Path>>(file: P) -> io::Result<Vec<u32>> {
     let f = fs::File::open(file)?;
     let mut board = Vec::with_capacity(BOARD_SIZE);
 
     for c in f.bytes() {
-        let c = c?;
-        if !char::from(c).is_numeric() {
+        let c = char::from(c?);
+        if !c.is_ascii_digit() {
             continue;
         }
-        board.push(c - b'0');
+        board.push(c.to_digit(10).unwrap());
     }
 
     if board.len() != BOARD_SIZE {
@@ -35,7 +35,7 @@ pub fn load<P: AsRef<Path>>(file: P) -> io::Result<Vec<u8>> {
     Ok(board)
 }
 
-pub fn print(board: &[u8]) {
+pub fn print(board: &[u32]) {
     for row in 0..9 {
         if row % 3 == 0 {
             println!("-------------------------");
