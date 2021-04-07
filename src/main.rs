@@ -35,7 +35,7 @@ fn main() {
 				println!("{} -> \"{}\"", e, file);
 				println!();
 			}
-            // pour tout le reste print le board
+            // Otherwise, solution is printed
 			_ => {}
 		}
 	};
